@@ -23,6 +23,8 @@ jobs:
   include:
     - stage: Backend Test
       script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
     - stage: Frontend Test
       before_install:
       - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
@@ -30,11 +32,9 @@ jobs:
       - unzip chromedriver_linux64.zip
       - sudo chmod u+x chromedriver
       - sudo mv chromedriver /usr/bin/
-      - sudo pip install urllib3
       - sudo pip install -r requirements.txt
       - go run main.go &
       script: robot tests.robot
       
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+
