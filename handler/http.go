@@ -3,6 +3,7 @@ package handler
 import (
 	"net"
 	"net/http"
+	"os"
 )
 
 func RedirectToHTTPS(w http.ResponseWriter, r *http.Request) {
@@ -10,7 +11,11 @@ func RedirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		host = r.Host
 	}
-	target := "https://" + host + ":4433" + r.URL.Path
+	port := ":443"
+	if os.Getenv("SolidTesting") == "true" {
+		port = ":4433"
+	}
+	target := "https://" + host + port + r.URL.Path
 	if len(r.URL.RawQuery) > 0 {
 		target += "?" + r.URL.RawQuery
 	}

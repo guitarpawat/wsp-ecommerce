@@ -1,15 +1,34 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/guitarpawat/middleware"
+	"github.com/guitarpawat/wsp-ecommerce/handler"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
-	"github.com/guitarpawat/wsp-ecommerce/handler"
 )
 
+var env, dbhost, dbport, dbname string
+
+func init() {
+	flag.StringVar(&env, "env", "TESTING", "Indicates the program runs on the TESTING or PRODUCTION environment")
+	flag.StringVar(&dbhost, "dbhost", "localhost", "Database host")
+	flag.StringVar(&dbport, "dbport", "27017", "Database host")
+	flag.StringVar(&dbname, "dbname", "", "Name of database (default \"solid\" for PRODUCTION and \"solidtest\" for TESTING)")
+	flag.Parse()
+	if env == "PRODUCTION" && dbname == "" {
+		flag.Set("dbname", "solid")
+		dbname = "solid"
+	} else if dbname == "" {
+		flag.Set("dbname", "solidtest")
+		dbname = "solidtest"
+	}
+}
+
 func main() {
+
 	r := mux.NewRouter()
 	fs := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
 
@@ -53,10 +72,19 @@ func main() {
 
 	handler.Validate()
 
-	go func() {
-		log.Fatalln(http.ListenAndServeTLS(":4433", "ssl/server.crt", "ssl/server.key", r))
-	}()
-	log.Fatalln(http.ListenAndServe(":8000", httpr))
+	if env == "PRODUCTION" {
+		fmt.Println("Running on port 80 and 443")
+		go func() {
+			log.Fatalln(http.ListenAndServeTLS(":443", "ssl/server.crt", "ssl/server.key", r))
+		}()
+		log.Fatalln(http.ListenAndServe(":80", httpr))
+	} else {
+		fmt.Println("Running on port 8000 and 4433")
+		go func() {
+			log.Fatalln(http.ListenAndServeTLS(":4433", "ssl/server.crt", "ssl/server.key", r))
+		}()
+		log.Fatalln(http.ListenAndServe(":8000", httpr))
+	}
 }
 
 func handlePage(df middleware.DoableFunc) http.Handler {
