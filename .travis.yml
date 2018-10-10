@@ -6,15 +6,36 @@ go:
 
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
+env:
+  global:
+    - JYTHON=false
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
 branches:
   only:
   - /.*/
 
 before_install:
   - go get -t -v ./...
+  - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+  - wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip
+  - sudo chmod u+x chromedriver
+  - sudo mv chromedriver /usr/bin/
 
-script:
-  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+install: "pip3 install -r requirements.txt"  
+
+jobs:
+  include:
+    - stage: Backend Test
+      script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+    - stage: Frontend Test
+      script: robot tests.robot
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
