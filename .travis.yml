@@ -9,12 +9,6 @@ go_import_path: github.com/guitarpawat/wsp-ecommerce
 env:
   global:
     - JYTHON=false
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
 
 branches:
   only:
@@ -28,16 +22,18 @@ jobs:
     - stage: Backend Test
       script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
     - stage: Frontend Test
-      script: CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
-      script: wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
-      script: unzip chromedriver_linux64.zip
-      script: sudo chmod u+x chromedriver
-      script: sudo mv chromedriver /usr/bin/
-      script: sudo apt-get install python3
-      script: sudo apt-get install python3-pip
-      script: sudo pip3 install urllib3
-      script: sudo pip3 install -r requirements.txt
-      script: go run main.go &
+      before_install:
+      - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+      - wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
+      - unzip chromedriver_linux64.zip
+      - sudo chmod u+x chromedriver
+      - sudo mv chromedriver /usr/bin/
+      - sudo apt-get install python3
+      - sudo apt-get install python3-pip
+      - sudo apt-get install google-chrome-stable
+      - sudo pip3 install urllib3
+      - sudo pip3 install -r requirements.txt
+      - go run main.go &
       script: robot tests.robot
       
 
