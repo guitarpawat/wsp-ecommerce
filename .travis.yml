@@ -4,7 +4,7 @@ go:
   - 1.10.x
   - 1.11.x
 
-python: 3.7
+python: 3.6
 
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
@@ -30,7 +30,7 @@ before_install:
   - sudo chmod u+x chromedriver
   - sudo mv chromedriver /usr/bin/
 
-install: "pip install -r requirements.txt"  
+install: "pip3 install -r requirements.txt"  
 
 jobs:
   include:
