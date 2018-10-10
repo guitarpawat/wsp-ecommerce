@@ -4,8 +4,6 @@ go:
   - 1.10.x
   - 1.11.x
 
-python: 3.6
-
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
 env:
@@ -30,6 +28,7 @@ before_install:
   - sudo chmod u+x chromedriver
   - sudo mv chromedriver /usr/bin/
   - "sudo apt-get install python3"
+  - "sudo apt-get install pip3"
   - "sudo pip3 install -r requirements.txt" 
 
 
