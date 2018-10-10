@@ -22,23 +22,24 @@ branches:
 
 before_install:
   - go get -t -v ./...
-  - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
-  - wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip
-  - sudo chmod u+x chromedriver
-  - sudo mv chromedriver /usr/bin/
-  - "sudo apt-get install python3"
-  - "sudo apt-get install python3-pip"
-  - "sudo pip3 install -r requirements.txt" 
-
 
 jobs:
   include:
     - stage: Backend Test
       script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
     - stage: Frontend Test
+      script: CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+      script: wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
+      script: unzip chromedriver_linux64.zip
+      script: sudo chmod u+x chromedriver
+      script: sudo mv chromedriver /usr/bin/
+      script: sudo apt-get install python3
+      script: sudo apt-get install python3-pip
+      script: sudo pip3 install urllib3
+      script: sudo pip3 install -r requirements.txt
       script: go run main.go &
       script: robot tests.robot
+      
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
