@@ -123,21 +123,21 @@
 
                 {{if eq .User ""}}
                 <!--Register-->
-                <a href="#myModal_regis" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal">
+                <a href="#myModal_regis" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" id="register">
                     <img src="../static/assets/icon/register.png" class="header-icon1" alt="ICON">
                 </a>
                 <!--Login-->
-                <a href="#myModal" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal">
+                <a href="#myModal" class="header-wrapicon1 dis-block m-l-30" data-toggle="modal" id="login">
                     <img src="../static/assets/icon/login.png" class="header-icon1" alt="ICON">
                 </a>
 
                 {{else}}
                 <!-- User -->
-                <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                <a href="#" class="header-wrapicon1 dis-block m-l-30" id="user_profile">
                     <img src="../static/assets/icon/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
                 <!--Logout-->
-                <a href="/logout/" class="header-wrapicon1 dis-block m-l-30">
+                <a href="/logout/" class="header-wrapicon1 dis-block m-l-30" id="logout">
                     <img src="../static/assets/icon/logout.png" class="header-icon1" alt="ICON">
                 </a>
                 {{end}}
