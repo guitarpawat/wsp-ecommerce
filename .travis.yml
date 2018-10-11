@@ -15,7 +15,7 @@ jobs:
   include:
     - stage: "Backend Test"
       name: "go 1.10.x"
-      go: "1.10.x"
+      go: "Unit Test 1.10.x"
       before_install: skip
       install:
         - go get -t -v ./...
@@ -26,7 +26,7 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
 
     - stage: "Backend Test"
-      name: "go 1.11.x"
+      name: "Unit Test go 1.11.x"
       go: "1.11.x"
       before_install: skip
       install:
@@ -38,7 +38,7 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
         
     - stage: "Frontend Test"
-      name: "go 1.10.x"
+      name: "Robot Framework go 1.10.x"
       go: "1.10.x"
       services: mongodb
       addons:
@@ -63,9 +63,9 @@ jobs:
       script: robot tests.robot
       name: "Frontend Test"
       after-script: skip
-      
+
     - stage: "Frontend Test"
-      name: "go 1.11.x"
+      name: "Robot Framework go 1.11.x"
       go: "1.11.x"
       services: mongodb
       addons:
