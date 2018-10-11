@@ -31,15 +31,15 @@ jobs:
           packages:
             - google-chrome-stable
       before_install:
-      - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
-      - sudo wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
-      - sudo unzip chromedriver_linux64.zip
-      - sudo chmod u+x chromedriver
-      - sudo mv chromedriver /usr/bin/
-      - sudo chmod 777 /usr/bin/chromedriver
-      - sudo -H pip install -r requirements.txt
-      - go get -t -v ./...
+      # - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+      # - sudo wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
+      # - sudo unzip chromedriver_linux64.zip
+      # - sudo chmod u+x chromedriver
+      # - sudo mv chromedriver /usr/bin/
+      # - sudo chmod 777 /usr/bin/chromedriver
+      # - sudo -H pip install -r requirements.txt
+      # - go get -t -v ./...
       - go run main.go &
-      - google-chrome-stable --no-sandbox --ignore-certificate-errors=yes --window-size=4200,1800 --headless --disable-gpu --remote-debugging-port=9222 https://localhost:4433 &
+      # - google-chrome-stable --no-sandbox --ignore-certificate-errors=yes --window-size=4200,1800 --headless --disable-gpu --remote-debugging-port=9222 https://localhost:4433 &
       script: pybot tests.robot
       
