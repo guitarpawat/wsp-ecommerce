@@ -24,19 +24,19 @@ jobs:
     #   after_success:
     #     - bash <(curl -s https://codecov.io/bash)
     - stage: Frontend Test
-      addons:
-        apt:
-          sources:
-            - google-chrome
-          packages:
-            - google-chrome-stable
+      # addons:
+      #   apt:
+      #     sources:
+      #       - google-chrome
+      #     packages:
+      #       - google-chrome-stable
       before_install:
-      # - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
-      # - sudo wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
-      # - sudo unzip chromedriver_linux64.zip
-      # - sudo chmod u+x chromedriver
-      # - sudo mv chromedriver /usr/bin/
-      # - sudo chmod 777 /usr/bin/chromedriver
+      - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+      - sudo wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
+      - sudo unzip chromedriver_linux64.zip
+      - sudo chmod u+x chromedriver
+      - sudo mv chromedriver /usr/bin/
+      - sudo chmod 777 /usr/bin/chromedriver
       - sudo -H pip install -r requirements.txt
       # - go get -t -v ./...
       - go run main.go &
