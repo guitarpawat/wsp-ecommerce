@@ -11,14 +11,13 @@ branches:
   only:
   - /.*/
 
-go:
-  - "1.10.x"
-  - "1.11.x"
-
 jobs:
   include:
     - stage: "Test"
       name: "Backend Test"
+      go:
+        - "1.10.x"
+        - "1.11.x"
       before_install: skip
       install:
         - go get -t -v ./...
@@ -28,8 +27,11 @@ jobs:
       after_success:
         - bash <(curl -s https://codecov.io/bash)
         
-    - stage: "test"
+    - stage: "Test"
       name: "Frontend Test"
+      go:
+        - "1.10.x"
+        - "1.11.x"
       services: mongodb
       addons:
         apt:
