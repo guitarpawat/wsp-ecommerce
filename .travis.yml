@@ -14,13 +14,13 @@ branches:
 matrix:
   include:
     - name: "Backend Test"
-      go:
-      - "1.10.x"
-      - "1.11.x"
+      go: "1.10.x"
+    - name: "Backend Test"
+      go: "1.11.x"
     - name: "Frontend Test"
-      go:
-      - "1.10.x"
-      - "1.11.x"
+      go: "1.10.x"
+    - name: "Frontend Test"
+      go: "1.11.x"
 
 jobs:
   include:
