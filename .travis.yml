@@ -2,7 +2,7 @@ language: go
 
 go:
   - 1.10.x
-  - 1.11.x
+  # - 1.11.x
 
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
@@ -11,6 +11,7 @@ services: mongodb
 env:
   global:
     - JYTHON=false
+    - DISPLAY=':99.0'
 
 branches:
   only:
@@ -21,11 +22,17 @@ before_install:
 
 jobs:
   include:
-    - stage: Backend Test
-      script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
+    # - stage: Backend Test
+    #   script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+    #   after_success:
+    #     - bash <(curl -s https://codecov.io/bash)
     - stage: Frontend Test
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
       before_install:
       - CDVERSION=`curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
       - sudo wget --no-verbose http://chromedriver.storage.googleapis.com/$CDVERSION/chromedriver_linux64.zip
