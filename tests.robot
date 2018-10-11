@@ -3,7 +3,7 @@ Library    SeleniumLibrary
 Test Teardown     End of test
 
 *** Variables ***
-${BROWSER}    headlesschrome
+${BROWSER}    chrome
 ${INVALID_USERNAME}    fgeagbrsenrshbsshthjrshnsgsegswewaf
 ${INVALID_PASSWORD}    dfgwehrsafdvsdnrseefws145s1hg4grsbw
 
