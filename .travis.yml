@@ -12,11 +12,11 @@ branches:
   - /.*/
 
 jobs:
+  go:
+    - "1.10.x"
+    - "1.11.x"
   include:
     - stage: Backend Test
-      go:
-        - "1.10.x"
-        - "1.11.x"
       script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
       after_success:
         - bash <(curl -s https://codecov.io/bash)
