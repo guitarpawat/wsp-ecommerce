@@ -13,7 +13,7 @@ End of test
 
 User opens a home page on PC
     Open Browser    http://localhost:8000    ${BROWSER}
-    Maximize Browser Window
+    Set Window Size    1920    1080
     Wait Until Element Is Visible    alertBox
 
 User opens a login page
