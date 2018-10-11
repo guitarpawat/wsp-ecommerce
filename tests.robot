@@ -14,6 +14,7 @@ End of test
 User opens a home page on PC
     Open Browser    https://localhost:4433    ${BROWSER}
     Maximize Browser Window
+    Wait Until Element Is Visible    alertBox
 
 User opens a login page
     Click Element    id:loginIcon
