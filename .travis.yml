@@ -35,7 +35,7 @@ jobs:
       - sudo -H pip install -r requirements.txt
       # - go get -t -v ./...
       - sudo mkdir /usr/local/share/ca-certificates/solid
-      - sudo cp ssl/server.crt /usr/local/share/ca-certificates/server.crt
+      - sudo cp ssl/server.crt /usr/local/share/ca-certificates/solid/server.crt
       - sudo chmod 777 /usr/local/share/ca-certificates/solid
       - sudo chmod 777 /usr/local/share/ca-certificates/solid/server.crt
       - go run main.go &
