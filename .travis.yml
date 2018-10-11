@@ -39,6 +39,6 @@ jobs:
       - sudo chmod 777 /usr/local/share/ca-certificates/solid
       - sudo chmod 777 /usr/local/share/ca-certificates/solid/server.crt
       - go run main.go &
-      # - google-chrome-stable --no-sandbox --ignore-certificate-errors=yes --window-size=4200,1800 --headless --disable-gpu --remote-debugging-port=9222 https://localhost:4433 &
+      - google-chrome-stable --no-sandbox --ignore-certificate-errors=yes --window-size=4200,1800 --headless --disable-gpu --remote-debugging-port=9222 https://localhost:4433 &
       script: pybot tests.robot
       
