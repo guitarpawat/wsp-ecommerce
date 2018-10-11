@@ -41,7 +41,7 @@ jobs:
       - sudo mv chromedriver /usr/bin/
       - sudo chmod 777 /usr/bin/chromedriver
       - sudo -H pip install -r requirements.txt
-      - sudo go run main.go &
-      - sudo google-chrome-stable --no-sandbox --headless --disable-gpu --disable-dev-shm-usage --remote-debugging-port=9222 https://localhost:4433 &
-      script: sudo robot tests.robot
+      - go run main.go &
+      - google-chrome-stable --no-sandbox --headless --disable-gpu --disable-dev-shm-usage --remote-debugging-port=9222 https://localhost:4433 &
+      script: robot tests.robot
       
