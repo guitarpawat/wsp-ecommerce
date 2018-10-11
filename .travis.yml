@@ -2,10 +2,6 @@ language: go
 
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
-go:
-  - "1.10.x"
-  - "1.11.x"
-
 env:
   global:
     - JYTHON=false
