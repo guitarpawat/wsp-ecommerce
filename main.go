@@ -79,6 +79,9 @@ func main() {
 			log.Fatalln(http.ListenAndServeTLS(":443", "ssl/server.crt", "ssl/server.key", r))
 		}()
 		log.Fatalln(http.ListenAndServe(":80", httpr))
+	} else if env == "CI" {
+		fmt.Println("Running on port 8000")
+		log.Fatalln(http.ListenAndServe(":8000", r))
 	} else {
 		fmt.Println("Running on port 8000 and 4433")
 		go func() {
