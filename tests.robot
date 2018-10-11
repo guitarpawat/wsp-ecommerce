@@ -12,7 +12,7 @@ End of test
     Close Browser
 
 User opens a home page on PC
-    Open Browser    http://localhost:8000    ${BROWSER}
+    Open Browser    https://localhost:4433    ${BROWSER}
     Set Window Size    1920    1080
     Wait Until Element Is Visible    alertBox
 
