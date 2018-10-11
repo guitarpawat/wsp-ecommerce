@@ -2,7 +2,7 @@ language: go
 
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
- go:
+go:
   - "1.10.x"
   - "1.11.x"
 
@@ -14,6 +14,7 @@ env:
 branches:
   only:
   - /.*/
+
 stages:
   - "Backend Test"
   - "Frontend Test"
