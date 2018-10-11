@@ -2,10 +2,6 @@ language: go
 
 go_import_path: github.com/guitarpawat/wsp-ecommerce
 
-go:
-  - "1.10.x"
-  - "1.11.x"
-
 env:
   global:
     - JYTHON=false
@@ -15,15 +11,19 @@ branches:
   only:
   - /.*/
 
-before_install: 
-  - go get -t -v ./...
+go:
+  - "1.10.x"
+  - "1.11.x"
 
 jobs:
   include:
     - stage: "Backend Test"
+      install:
+        - go get -t -v ./...
       script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+        
     - stage: "Frontend Test"
       services: mongodb
       addons:
