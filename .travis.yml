@@ -11,13 +11,21 @@ branches:
   only:
   - /.*/
 
+matrix:
+  include:
+    - name: "Backend Test"
+      go:
+      - "1.10.x"
+      - "1.11.x"
+    - name: "Frontend Test"
+      go:
+      - "1.10.x"
+      - "1.11.x"
+
 jobs:
   include:
     - stage: "Test"
       name: "Backend Test"
-      go:
-        - "1.10.x"
-        - "1.11.x"
       before_install: skip
       install:
         - go get -t -v ./...
@@ -29,9 +37,6 @@ jobs:
         
     - stage: "Test"
       name: "Frontend Test"
-      go:
-        - "1.10.x"
-        - "1.11.x"
       services: mongodb
       addons:
         apt:
