@@ -80,11 +80,8 @@ func main() {
 		}()
 		log.Fatalln(http.ListenAndServe(":80", httpr))
 	} else {
-		fmt.Println("Running on port 8000 and 4433")
-		go func() {
-			log.Fatalln(http.ListenAndServeTLS(":4433", "ssl/server.crt", "ssl/server.key", r))
-		}()
-		log.Fatalln(http.ListenAndServe(":8000", httpr))
+		fmt.Println("Running on port 8000")
+		log.Fatalln(http.ListenAndServe(":8000", r))
 	}
 }
 
