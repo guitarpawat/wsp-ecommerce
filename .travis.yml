@@ -21,11 +21,11 @@ stages:
 
 jobs:
   include:
-    - stage: Backend Tes
+    - stage: "Backend Test"
       script: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
       after_success:
         - bash <(curl -s https://codecov.io/bash)
-    - stage: 
+    - stage: "Frontend Test"
       services: mongodb
       addons:
         apt:
