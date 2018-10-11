@@ -16,7 +16,7 @@ stages:
   - "Backend Test"
   - "Frontend Test"
 
-jobs:
+matrix:
   include:
     - stage: "Backend Test"
       go: "1.10.x"
