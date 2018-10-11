@@ -3,7 +3,7 @@ Library    SeleniumLibrary
 Test Teardown     End of test
 
 *** Variables ***
-${BROWSER}    chrome
+${BROWSER}    headlesschrome
 ${INVALID_USERNAME}    fgeagbrsenrshbsshthjrshnsgsegswewaf
 ${INVALID_PASSWORD}    dfgwehrsafdvsdnrseefws145s1hg4grsbw
 
@@ -12,7 +12,7 @@ End of test
     Close Browser
 
 User opens a home page on PC
-    Open Browser    https://localhost:4433    ${BROWSER}
+    Open Browser    http://localhost:8000    ${BROWSER}
     Set Window Size    1920    1080
     Wait Until Element Is Visible    alertBox
 
