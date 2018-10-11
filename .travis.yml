@@ -40,6 +40,6 @@ jobs:
       - sudo -H pip install -r requirements.txt
       - go get -t -v ./...
       - go run main.go &
-      - google-chrome-stable --no-sandbox --ignore-certificate-errors=yes --headless --disable-gpu --remote-debugging-port=9222 https://localhost:4433 &
+      - google-chrome-stable --no-sandbox --ignore-certificate-errors=yes --window-size=1920,1080 --headless --disable-gpu --remote-debugging-port=9222 https://localhost:4433 &
       script: pybot tests.robot
       

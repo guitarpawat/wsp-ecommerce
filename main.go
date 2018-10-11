@@ -3,11 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/guitarpawat/middleware"
 	"github.com/guitarpawat/wsp-ecommerce/handler"
-	"log"
-	"net/http"
 )
 
 var env, dbhost, dbport, dbname string
